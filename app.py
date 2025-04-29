@@ -14,7 +14,11 @@ escopo = [
 ]
 
 # Autenticação
-credenciais = Credentials.from_service_account_file(caminho_arquivo_json, scopes=escopo)
+import json
+import os
+
+service_account_info = json.loads(os.environ["GOOGLE_CREDENTIALS"])
+credenciais = Credentials.from_service_account_info(service_account_info, scopes=escopo)
 cliente = gspread.authorize(credenciais)
 
 # Acesso à planilha
